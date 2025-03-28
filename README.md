@@ -1,19 +1,43 @@
-# Foss BashScripting
+# ExtArrange - File Organizer Script
 
-See [scripts](./scripts) folder for more information.
+## 📌 Overview
+**ExtArrange** is a Bash script that organizes files in a directory by grouping them into folders based on their file extensions. It automatically detects file types and moves them into appropriate categorized folders.
 
-Whereever there is a work to do, there will be a comment present with word "TODO".
+## 🔧 Features
+- Supports **multiple special cases** for better organization.
+- Handles **compressed files**, **archives**, **media**, **documents**, **source code**, and more.
+- Uses `fd` for fast file discovery.
 
-## Running scripts
-
-After cd into this repository
-```bash
-export PATH="$PATH:$PWD/scripts"
-
-# All scripts are ready to execute by their name
+## 📂 Folder Structure Example
+Before running the script:
+```
+Downloads/
+├── file1.jpg
+├── file2.mp3
+├── archive.tar.gz
+├── document.pdf
+├── script.sh
+├── notes.txt
+```
+After running the script:
+```
+Downloads/
+├── images/
+│   └── file1.jpg
+├── audio/
+│   └── file2.mp3
+├── tar/
+│   └── archive.tar.gz
+├── documents/
+│   └── document.pdf
+├── scripts/
+│   └── script.sh
+├── text_documents/
+│   └── notes.txt
 ```
 
-## Some external resources
 
-* [Linux Basics & CLI Tutorial](https://www.freecodecamp.org/news/linux-command-line-tutorial)
-* [Learn X in Y Minutes - Bash](https://learnxinyminutes.com/docs/bash/)
+##  Checkout
+- [x] I have read all the contributor guidelines for the repo
+
+
