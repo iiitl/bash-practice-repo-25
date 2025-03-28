@@ -11,7 +11,65 @@ require fd
 require egrep
 
 declare -A special_cases=(
-    ['^*.(tar.*|tbz)$']='tar'
+    # Tar-based archives grouped into "tar"
+    ['^*.(tar.gz|tar.bz2|tar.xz|tar.lz|tar.lzma|tar.Z)$']='tar'
+    
+    # Other compressed formats grouped into "compressed"
+    ['^*.(gz|bz2|xz|lz|lzma|zip|rar|7z|Z)$']='compressed'
+
+    # Image formats grouped into "images"
+    ['^*.(jpg|jpeg|png|gif|bmp|tiff|svg|webp|ico|heif|heic)$']='images'
+
+    # Video formats grouped into "videos"
+    ['^*.(mp4|mkv|avi|mov|flv|wmv|webm|mpeg|mpg|3gp|ogv)$']='videos'
+
+    # Audio formats grouped into "audio"
+    ['^*.(mp3|wav|flac|aac|ogg|m4a|wma|mid|opus)$']='audio'
+
+    # Documents grouped into "documents"
+    ['^*.(pdf|epub|mobi|djvu|azw3|chm)$']='documents'
+
+    # Word processing files grouped into "text_documents"
+    ['^*.(doc|docx|odt|rtf|tex|md|txt|wks|wps)$']='text_documents'
+
+    # Spreadsheet formats grouped into "spreadsheets"
+    ['^*.(xls|xlsx|csv|ods|tsv|dif)$']='spreadsheets'
+
+    # Presentations grouped into "presentations"
+    ['^*.(ppt|pptx|odp|key)$']='presentations'
+
+    # Source code files grouped into "programming"
+    ['^*.(c|cpp|h|hpp|cs|java|kt|rs|go|swift|dart)$']='programming'
+
+    # Scripting languages grouped into "scripts"
+    ['^*.(py|ipynb|rb|pl|php|sh|bash|zsh|ps1|cmd)$']='scripts'
+
+    # Web development files grouped into "web"
+    ['^*.(html|htm|css|scss|less|xml|xhtml)$']='web'
+
+    # Config files grouped into "config"
+    ['^*.(json|yaml|yml|toml|ini|cfg|conf)$']='config'
+
+    # Log files grouped into "logs"
+    ['^*.(log|out|err|trace)$']='logs'
+
+    # Executables grouped into "executables"
+    ['^*.(exe|msi|bat|cmd|deb|rpm|apk|appimage|sh)$']='executables'
+
+    # Disk images grouped into "disk_images"
+    ['^*.(iso|img|dmg|vhd|vmdk)$']='disk_images'
+
+    # Design files grouped into "design"
+    ['^*.(psd|ai|xd|fig|sketch|indd|cdr)$']='design'
+
+    # Font files grouped into "fonts"
+    ['^*.(ttf|otf|woff|woff2|eot)$']='fonts'
+
+    # Backup and temporary files grouped into "backup"
+    ['^.(bak|old|tmp|swp|swo|~|tmp.)$']='backup'
+
+    # Database files grouped into "databases"
+    ['^*.(db|sqlite|sql|mdb|accdb|ndf|ldf)$']='databases'
     # TODO: Add your own pattern here for similar file types appropriately
     # Refer https://regex101.com/ & https://github.com/ziishaned/learn-regex/ for explaination and writing patterns
     # These (regex) are same as ones used in sed command
@@ -21,7 +79,7 @@ fd -tf -d1 \
 | while read file; do
     folder="$PWD/${file##*.}"
     for regex in "${!special_cases[@]}"; do
-        (echo "$file" | egrep -q "$regex") && {
+        (echo "$file" | egrep -iq "$regex") && {
             folder="$PWD/${special_cases[$regex]}"
             break
         }
@@ -30,4 +88,3 @@ fd -tf -d1 \
     mkdir -p "$folder"
     mv "$file" "$folder"
 done
-
