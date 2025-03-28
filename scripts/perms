@@ -7,3 +7,7 @@
 # 775 weather
 # 664 ../README.md
 
+for file in "$@"; do
+    perms=$(stat -c "%a" "$file")
+    echo "$perms $file"
+done
