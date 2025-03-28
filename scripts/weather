@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
-# TODO: Display weather of IIIT, Lucknow
-# For more information see: https://wttr.in/:help
+
+LOCATION=${1:-"IIITLucknow"}
+# Use the first argument as location, default to "IIIT Lucknow" if none is provided
+
+curl -s "wttr.in/${LOCATION}?format=3"
