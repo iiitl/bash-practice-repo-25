@@ -2,3 +2,7 @@
 
 # TODO: Display weather of IIIT, Lucknow
 # For more information see: https://wttr.in/:help
+
+read -p "Enter location(City) : " location
+curl https://wttr.in/"$location"
+
