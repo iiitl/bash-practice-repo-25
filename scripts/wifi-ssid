@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 
-# Extract the wifi username (SSID)
-# Refer: "iw dev wlan0 link" command output for this
+iface=$(iw dev | awk '/Interface/ {print $2}')
+
+ssid=$(iw dev "$iface" link | awk -F': ' '/SSID/ {print $2}')
+
+if [ -z "$ssid" ]; then
+  echo "Not connected to any WiFi network."
+else
+  echo "Connected SSID: $ssid"
+fi
