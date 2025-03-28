@@ -2,3 +2,10 @@
 
 # TODO: Display weather of IIIT, Lucknow
 # For more information see: https://wttr.in/:help
+if [[ "$1" == 'tomorrow' ]]; then
+        echo "Today's and tomorrow's weather forecast of IIIT Lucknow : "
+        curl wttr.in/26.7983,81.0239?2nF
+else
+        echo "Weather of IIIT Lucknow : "
+        curl wttr.in/26.7983,81.0239?1nF
+fi
