@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 
-grep -E 'Tctl|Tdie|Package id' /sys/class/hwmon/hwmon*/temp*_label | head -n1 | cut -d':' -f1 | sed 's/label/input/' | xargs cat
+# Get the temperature file corresponding to CPU die
+TEMP_FILE=$(grep -El 'Tctl|Tdie|Package id' /sys/class/hwmon/hwmon*/temp*_label | head -n1 | sed 's/label/input/')
 
-# Following script outputs current cpu die temperature in milidegree-celcius, convert it to celcius and fahrenheit and display as:
-#
-# Celcius: 42.0 C
-# Fahrenheit: 107.6 F
+# Read the temperature in millidegrees Celsius
+if [[ -f "$TEMP_FILE" ]]; then
+    TEMP_MILLIC=$(cat "$TEMP_FILE")
+    TEMP_C=$(echo "scale=1; $TEMP_MILLIC / 1000" | bc)
+    TEMP_F=$(echo "scale=1; ($TEMP_C * 9/5) + 32" | bc)
+    
+    # Display the temperatures
+    echo "Celsius: $TEMP_C C"
+    echo "Fahrenheit: $TEMP_F F"
+else
+    echo "Error: Could not find CPU temperature file."
+fi
