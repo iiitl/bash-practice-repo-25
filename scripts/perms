@@ -7,3 +7,17 @@
 # 775 weather
 # 664 ../README.md
 
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <file1> <file2> ..."
+  exit 1
+fi
+
+for file in "$@"; do
+  if [ -e "$file" ]; then
+    # Fetching permissions in octal format
+    file_permissions=$(stat -c "%a" "$file")
+    echo "$file_permissions $file"
+  else
+    echo "Error: '$file' does not exist" >&2
+  fi
+done
