@@ -1,8 +1,29 @@
 #!/usr/bin/env bash
 
-# TODO: Make a script to download youtube video from given timeframes
-#
-# E.g.: youtube-time 2:00 4:00 tutorial.mkv "https://www.youtube.com/watch?v=SPwyp2NG-bE"
-# The above command should create a output file which contains the video from 2 min to 4 min.
-#
-# Refer: youtube-dl and ffmpeg commands for this
+if [[ $# -ne 4 ]]; then
+    echo "Usage: $0 <start_time> <end_time> <output_file> <youtube_url>"
+    echo "Example: $0 2:00 4:00 tutorial.mkv \"https://www.youtube.com/watch?v=SPwyp2NG-bE\""
+    exit 1
+fi
+
+start="$1"
+end="$2"
+output="$3"
+url="$4"
+
+temp_file="temp_video.mp4"
+
+echo "Downloading video..."
+yt-dlp -f best -o "$temp_file" "$url"
+
+if [[ ! -f "$temp_file" ]]; then
+    echo "Download failed!"
+    exit 1
+fi
+
+echo "Trimming video from $start to $end..."
+ffmpeg -i "$temp_file" -ss "$start" -to "$end" -c copy "$output" -y
+
+echo "Saved as: $output"
+rm "$temp_file"
+
