@@ -6,4 +6,16 @@
 # $ perms weather ../README.md
 # 775 weather
 # 664 ../README.md
+perms() {
+    for file in "$@"; do
+        if [[ -e "$file" ]]; then
+            printf "%o %s\n" "$(stat -c %a "$file")" "$file"
+        else
+            echo "File not found: $file"
+        fi
+    done
+}
+
+echo "File Permissions:"
+perms "$@"
 
