@@ -19,7 +19,7 @@ declare -A color_mapping=(
 )
 
 if [[ $1 == 'reset' ]]; then
-   echo -ne "\033[0m"
+  change 0 00 
 else
     color 1 ${color_mapping[$1]}
 fi
