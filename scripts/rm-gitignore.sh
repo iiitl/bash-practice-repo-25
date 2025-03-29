@@ -5,7 +5,11 @@
 
 find . -name .git -type d -prune | while read git_path; do
     project_root=$(dirname "$git_path")
-    [ -f "$project_root/.gitignore" ] && xargs rm -f < "$project_root/.gitignore"
+    
+    if [ -f "$project_root/.gitignore" ]; then
+        echo "Cleaning ignored files in: $project_root"
+        (cd "$project_root" && git clean -fdX)  # Remove only ignored files
+    fi
 done
 
 echo "Gitignore cleanup completed."
