@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Function to apply color
+color() {
+    echo -ne "\033[$1;$2m"
+}
+
+# Associative array for color mapping
+declare -A color_mapping=(
+    
+    ['red']=31
+    ['magenta']=35
+    ['green']=32
+    ['blue']=34
+    ['cyan']=36 
+    ['reset']=0
+)
+
+# Check if the user wants to reset the color
+if [[ $1 == 'reset' ]]; then
+    color 0 00
+else
+    # Apply the color based on the input
+    color 1 ${color_mapping[$1]}
+fi
