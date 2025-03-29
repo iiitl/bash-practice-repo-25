@@ -2,3 +2,11 @@
 
 # Extract the wifi username (SSID)
 # Refer: "iw dev wlan0 link" command output for this
+
+iface=$(iw dev | awk '/Interface/ {print $2}') 
+
+if [[ -n "$iface" ]]; then
+    iw dev "$iface" link | grep -oP 'SSID: \K.*'
+else
+    echo "Error: No Wi-Fi interface found" >&2
+fi
