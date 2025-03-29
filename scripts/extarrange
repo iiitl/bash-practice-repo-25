@@ -4,17 +4,30 @@
 # TODO: Run this script in your downloads folder
 
 require() {
-    command -v "$1" 1>/dev/null || { >&2 echo "Error: $1 is not installed";exit 1; }
+    command -v "$1" 1>/dev/null || { >&2 echo "Error: $1 is not installed"; exit 1; }
 }
 
 require fd
 require egrep
 
 declare -A special_cases=(
-    ['^*.(tar.*|tbz)$']='tar'
-    # TODO: Add your own pattern here for similar file types appropriately
-    # Refer https://regex101.com/ & https://github.com/ziishaned/learn-regex/ for explaination and writing patterns
-    # These (regex) are same as ones used in sed command
+    ['^*\.(tar.*|tbz)$']='tar'
+    ['^*\.(jpeg|jpg)$']='jpg'
+    ['^*\.(htm|html)$']='html'
+    ['^*\.(mp3|wav|flac)$']='audio'
+    ['^*\.(mp4|mkv|avi|mov)$']='video'
+    ['^*\.(doc|docx|odt)$']='documents'
+    ['^*\.(pdf)$']='pdfs'
+    ['^*\.(xls|xlsx|csv)$']='spreadsheets'
+    ['^*\.(ppt|pptx)$']='presentations'
+    ['^*\.(zip|rar|7z|tar|gz)$']='archives'
+    ['^*\.(c|cpp|h|hpp|java|py|sh|js|ts)$']='code'
+    ['^*\.(exe|msi|dmg|apk)$']='executables'
+    ['^*\.(iso|img|bin)$']='disk_images'
+    ['^*\.(log|txt|md)$']='text_files'
+    ['^*\.(bak|tmp|swp)$']='backup_files'  
+    ['^*\.(cfg|ini|json|xml|yaml|yml)$']='config_files' 
+    ['^*\.(ttf|otf|woff|woff2)$']='fonts'  
 )
 
 fd -tf -d1 \
@@ -30,4 +43,3 @@ fd -tf -d1 \
     mkdir -p "$folder"
     mv "$file" "$folder"
 done
-
