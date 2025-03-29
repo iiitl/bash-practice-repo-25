@@ -2,3 +2,8 @@
 
 # Remove all the binary files (usually made after gcc) present inside current directory
 # Refer "man find" for more information, you can also use modern tool like fd instead of find
+
+# Using `find` to delete executables (binary files)
+find . -maxdepth 1 -type f -executable -delete
+
+echo "Removed all binary files in the current directory."
