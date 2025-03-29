@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+cpu_temp=$(grep -E 'Tctl|Tdie|Package id' /sys/class/hwmon/hwmon*/temp*_label | head -n1 | cut -d':' -f1 | sed 's/label/input/' | xargs cat)
 
-grep -E 'Tctl|Tdie|Package id' /sys/class/hwmon/hwmon*/temp*_label | head -n1 | cut -d':' -f1 | sed 's/label/input/' | xargs cat
+cpu_temp_C=$((cpu_temp/1000))
 
-# Following script outputs current cpu die temperature in milidegree-celcius, convert it to celcius and fahrenheit and display as:
-#
-# Celcius: 42.0 C
-# Fahrenheit: 107.6 F
+cpu_temp_F=$(((cpu_temp_C*9)/5+32))
+
+echo "temp in Celsius:$cpu_temp_C°C"
+echo "temp in Fahrenheit:$cpu_temp_F°F"
