@@ -2,3 +2,9 @@
 
 # Extract the wifi username (SSID)
 # Refer: "iw dev wlan0 link" command output for this
+SSID=$(iw dev wlan0 link | grep SSID | awk -F ': ' '{print $2}')
+
+# Check if the SSID is found
+if [ -z "$SSID" ]; then
+  echo "Not connected to any Wi-Fi network."
+
