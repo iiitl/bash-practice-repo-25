@@ -1,20 +1,50 @@
 #!/usr/bin/env bash
-
-# TODO (Run this script as): color magenta && echo hello && color reset
-
 color() {
     echo -ne "\033[$1;$2m"
 }
 
-declare -A color_mapping=(
-    # TODO: Add more color values
-    # Refer bash color codes
+# I added more color values
+declare -A color_mapping=( 
+    ['black']=30
+    ['red']=31
+    ['green']=32
+    ['yellow']=33
+    ['blue']=34
     ['magenta']=35
+    ['cyan']=36
+    ['white']=37
+    ['gold']=33
+    ['silver']=37
+    ['maroon']=31
+    ['navy']=34
+    ['teal']=36
+    ['aqua']=36
+    ['lavender']=35
+    ['beige']=37
+    ['coral']=31
+    ['peach']=33
+    ['lime']=32
+    ['olive']=32
+    ['turquoise']=36
+    ['burgundy']=31
+    ['amber']=33
+    ['charcoal']=90
+    ['mint']=32
+    ['periwinkle']=34
+    ['plum']=35
+    ['sapphire']=34
+    ['emerald']=32
+    ['fuchsia']=35
+    ['ivory']=37
+    ['salmon']=31
+    ['mustard']=33
+    ['khaki']=33
+    ['vermilion']=31
 )
 
-if [[ $1 == 'reset' ]]; then
+  if [[ $1 == 'reset' ]]; then
     color 0 00
-else
+ else
     color 1 ${color_mapping[$1]}
-fi
+ fi
 
