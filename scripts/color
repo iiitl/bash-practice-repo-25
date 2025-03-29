@@ -10,10 +10,16 @@ declare -A color_mapping=(
     # TODO: Add more color values
     # Refer bash color codes
     ['magenta']=35
+    ['blue']=34
+    ['red']=31
+    ['white']=37
+    ['yellow']=33
+    ['green']=32
+
 )
 
 if [[ $1 == 'reset' ]]; then
-    color 0 00
+   echo -ne "\033[0m"
 else
     color 1 ${color_mapping[$1]}
 fi
