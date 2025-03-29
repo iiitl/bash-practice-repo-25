@@ -2,3 +2,14 @@
 
 # TODO: Display weather of IIIT, Lucknow
 # For more information see: https://wttr.in/:help
+get_weather() {
+    location="${1:-IIIT Lucknow}"
+    echo "Fetching weather for $location..."
+    curl -s "wttr.in/$location?format=%C+%t"
+}
+
+location="IIIT Lucknow"
+
+weather=$(get_weather "$location")
+
+echo "Weather in $location: $weather"
