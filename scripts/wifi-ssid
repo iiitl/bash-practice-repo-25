@@ -1,4 +1,2 @@
-#!/usr/bin/env bash
-
-# Extract the wifi username (SSID)
-# Refer: "iw dev wlan0 link" command output for this
+# this is the code that works on command prompt
+netsh wlan show interfaces | findstr "SSID"
