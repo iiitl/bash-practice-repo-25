@@ -2,3 +2,25 @@
 
 # Remove all the binary files (usually made after gcc) present inside current directory
 # Refer "man find" for more information, you can also use modern tool like fd instead of find
+#!/bin/bash
+
+generate_password() {
+    local length=$1
+    if [[ $length -lt 4 ]]; then
+        echo "Password length must be at least 4." >&2
+        return 1
+    fi
+
+    local uppercase=$(tr -dc 'A-Z' < /dev/urandom | head -c1)
+    local lowercase=$(tr -dc 'a-z' < /dev/urandom | head -c1)
+    local digit=$(tr -dc '0-9' < /dev/urandom | head -c1)
+    local special=$(tr -dc '!@#$%^&*()_+-=[]{}|;:,.<>?' < /dev/urandom | head -c1)
+    
+    local all_chars='A-Za-z0-9!@#$%^&*()_+-=[]{}|;:,.<>?'
+    local remaining=$(tr -dc "$all_chars" < /dev/urandom | head -c$((length - 4)))
+    
+    local password="$uppercase$lowercase$digit$special$remaining"
+    echo "$password" | fold -w1 | shuf | tr -d '\n'
+    echo ""
+}
+generate_password 12
