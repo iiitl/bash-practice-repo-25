@@ -13,7 +13,7 @@ declare -A color_mapping=(
     ['magenta']=35
     ['cyan']=36
     ['silver']=37
-    ['light gray']=90
+    
      
 )
 
