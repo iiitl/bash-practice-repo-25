@@ -12,6 +12,13 @@ require egrep
 
 declare -A special_cases=(
     ['^*.(tar.*|tbz)$']='tar'
+    ['^*.(pptx?|odp)$']='presentations'  
+    ['^*.(pdf|epub)$']='ebooks' 
+    ['^*.(zip|rar|7z)$']='archives' 
+    ['^*.(mp3|wav|flac)$']='music' 
+     ['^*.(iso|img)$']='disk_images'
+    ['^*.(py|js|java)$']='code'
+    ['^*.(ttf|otf|woff)$']='fonts'  
     # TODO: Add your own pattern here for similar file types appropriately
     # Refer https://regex101.com/ & https://github.com/ziishaned/learn-regex/ for explaination and writing patterns
     # These (regex) are same as ones used in sed command
