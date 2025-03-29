@@ -2,3 +2,25 @@
 
 # Extract the wifi username (SSID)
 # Refer: "iw dev wlan0 link" command output for this
+
+There is 1 interface on the system:
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Dual Band Wireless-AC 8265
+    GUID                   : d82b3d9e-55cf-47d5-bba1-26f72ed5b846
+    Physical address       : 38:de:ad:e3:f9:5e
+    State                  : connected
+    SSID                   : Saroj hostel 1st floor 04
+    BSSID                  : e8:65:d4:0b:f9:84
+    Network type           : Infrastructure
+    Radio type             : 802.11n
+    Authentication         : WPA2-Personal
+    Cipher                 : CCMP
+    Connection mode        : Profile
+    Channel                : 11
+    Receive rate (Mbps)    : 65
+    Transmit rate (Mbps)   : 65
+    Signal                 : 66%
+    Profile                : Saroj hostel 1st floor 04
+
+    Hosted network status  : Not available
